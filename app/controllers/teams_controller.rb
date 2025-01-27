@@ -1,38 +1,60 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: %i[show edit update destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy]
 
+  # GET /teams
   def index
     @teams = Team.all
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
-  def show; end
+  # GET /teams/:id
+  def show
+  end
 
+  # GET /teams/new
   def new
     @team = Team.new
   end
 
+  # POST /teams
   def create
     @team = Team.new(team_params)
     if @team.save
-      redirect_to @team, notice: 'Team was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to teams_path, notice: "Team successfully created!" }
+        format.turbo_stream { flash.now[:notice] = "Team successfully created!" }
+      end
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def edit; end
+  # GET /teams/:id/edit
+  def edit
+  end
 
+  # PATCH/PUT /teams/:id
   def update
     if @team.update(team_params)
-      redirect_to @team, notice: 'Team was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to teams_path, notice: "Team successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = "Team successfully updated!" }
+      end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
+  # DELETE /teams/:id
   def destroy
     @team.destroy
-    redirect_to teams_url, notice: 'Team was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to teams_path, notice: "Team successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = "Team successfully deleted!" }
+    end
   end
 
   private
@@ -42,7 +64,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:name, :description, :start_date, :end_date)
+    params.require(:team).permit(:name, :institution, :start_date, :end_date)
   end
 end
-

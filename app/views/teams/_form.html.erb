@@ -1,0 +1,17 @@
+<%= simple_form_for @team, html: { data: { turbo_frame: "modal" } } do |f| %>
+  <div class="mb-4">
+    <%= f.input :name, input_html: { class: "w-full p-2 border rounded" } %>
+  </div>
+  <div class="mb-4">
+    <%= f.input :institution, input_html: { class: "w-full p-2 border rounded" } %>
+  </div>
+  <div class="mb-4">
+    <%= f.input :start_date, as: :date, input_html: { class: "w-full p-2 border rounded" } %>
+  </div>
+  <div class="mb-4">
+    <%= f.input :end_date, as: :date, input_html: { class: "w-full p-2 border rounded" } %>
+  </div>
+  <div class="flex justify-end">
+    <%= f.submit "Save", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
+  </div>
+<% end %>

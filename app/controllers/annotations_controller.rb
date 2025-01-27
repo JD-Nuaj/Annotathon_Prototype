@@ -1,38 +1,60 @@
 class AnnotationsController < ApplicationController
-  before_action :set_annotation, only: %i[show edit update destroy]
+  before_action :set_annotation, only: [:show, :edit, :update, :destroy]
 
+  # GET /annotations
   def index
     @annotations = Annotation.all
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
-  def show; end
+  # GET /annotations/:id
+  def show
+  end
 
+  # GET /annotations/new
   def new
     @annotation = Annotation.new
   end
 
+  # POST /annotations
   def create
     @annotation = Annotation.new(annotation_params)
     if @annotation.save
-      redirect_to @annotation, notice: 'Annotation was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to annotations_path, notice: "Annotation successfully created!" }
+        format.turbo_stream { flash.now[:notice] = "Annotation successfully created!" }
+      end
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def edit; end
+  # GET /annotations/:id/edit
+  def edit
+  end
 
+  # PATCH/PUT /annotations/:id
   def update
     if @annotation.update(annotation_params)
-      redirect_to @annotation, notice: 'Annotation was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to annotations_path, notice: "Annotation successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = "Annotation successfully updated!" }
+      end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
+  # DELETE /annotations/:id
   def destroy
     @annotation.destroy
-    redirect_to annotations_url, notice: 'Annotation was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to annotations_path, notice: "Annotation successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = "Annotation successfully deleted!" }
+    end
   end
 
   private
@@ -42,6 +64,6 @@ class AnnotationsController < ApplicationController
   end
 
   def annotation_params
-    params.require(:annotation).permit(:user_id, :sequence, :status, :grade, :comment)
+    params.require(:annotation).permit(:content, :team_id, :category_id)
   end
 end

@@ -1,0 +1,44 @@
+<div class="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-center mb-4">Team Dashboard</h1>
+
+  <!-- Flash messages -->
+  <div id="flash-messages">
+    <%= turbo_stream_from "flash" %>
+    <% flash.each do |type, message| %>
+      <div class="p-2 mb-4 bg-<%= type == 'notice' ? 'green' : 'red' %>-100 text-<%= type == 'notice' ? 'green' : 'red' %>-800 rounded">
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Teams Section -->
+  <div id="teams-section">
+    <%= turbo_stream_from "teams" %>
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Active Teams</h2>
+      <%= link_to "New Team", new_team_path, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    </div>
+
+    <% if @teams.present? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <% @teams.each do |team| %>
+          <div class="p-4 bg-gray-100 rounded shadow hover:shadow-md transition">
+            <h3 class="text-lg font-semibold mb-2"><%= team.name %></h3>
+            <p class="text-sm text-gray-700">
+              Institution: <%= team.institution %><br>
+              Start Date: <%= team.start_date %><br>
+              End Date: <%= team.end_date %>
+            </p>
+            <div class="mt-4 flex justify-between items-center">
+              <%= link_to "Details", team_path(team), class: "text-blue-500 hover:underline" %>
+              <%= link_to "Edit", edit_team_path(team), class: "text-yellow-500 hover:underline" %>
+              <%= link_to "Delete", team_path(team), data: { turbo_confirm: "Are you sure?" }, method: :delete, class: "text-red-500 hover:underline" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-500">No active teams available.</p>
+    <% end %>
+  </div>
+</div>

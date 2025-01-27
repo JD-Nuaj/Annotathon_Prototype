@@ -1,38 +1,60 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
+  # GET /categories
   def index
     @categories = Category.all
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
-  def show; end
+  # GET /categories/:id
+  def show
+  end
 
+  # GET /categories/new
   def new
     @category = Category.new
   end
 
+  # POST /categories
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to @category, notice: 'Category was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to categories_path, notice: "Category successfully created!" }
+        format.turbo_stream { flash.now[:notice] = "Category successfully created!" }
+      end
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def edit; end
+  # GET /categories/:id/edit
+  def edit
+  end
 
+  # PATCH/PUT /categories/:id
   def update
     if @category.update(category_params)
-      redirect_to @category, notice: 'Category was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to categories_path, notice: "Category successfully updated!" }
+        format.turbo_stream { flash.now[:notice] = "Category successfully updated!" }
+      end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
+  # DELETE /categories/:id
   def destroy
     @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to categories_path, notice: "Category successfully deleted!" }
+      format.turbo_stream { flash.now[:notice] = "Category successfully deleted!" }
+    end
   end
 
   private
@@ -42,6 +64,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name, :description)
+    params.require(:category).permit(:name)
   end
 end

@@ -1,0 +1,15 @@
+<%= turbo_stream.append "teams-section" do %>
+  <div class="p-4 bg-gray-100 rounded shadow hover:shadow-md transition">
+    <h3 class="text-lg font-semibold mb-2"><%= @team.name %></h3>
+    <p class="text-sm text-gray-700">
+      Institution: <%= @team.institution %><br>
+      Start Date: <%= @team.start_date %><br>
+      End Date: <%= @team.end_date %>
+    </p>
+    <div class="mt-4 flex justify-between items-center">
+      <%= link_to "Details", team_path(@team), class: "text-blue-500 hover:underline" %>
+      <%= link_to "Edit", edit_team_path(@team), class: "text-yellow-500 hover:underline" %>
+      <%= link_to "Delete", team_path(@team), data: { turbo_confirm: "Are you sure?" }, method: :delete, class: "text-red-500 hover:underline" %>
+    </div>
+  </div>
+<% end %>
