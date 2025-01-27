@@ -10,9 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_24_144430) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_124626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "annotations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "sequence", null: false
+    t.string "status", default: "pending", null: false
+    t.integer "grade"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_annotations_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.string "namespace", default: "static", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "revisions", force: :cascade do |t|
+    t.bigint "annotation_id", null: false
+    t.bigint "user_id", null: false
+    t.text "change_log", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["annotation_id"], name: "index_revisions_on_annotation_id"
+    t.index ["user_id"], name: "index_revisions_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,7 +67,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_24_144430) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username", null: false
+    t.string "role", default: "annotator", null: false
+    t.bigint "team_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  add_foreign_key "annotations", "users"
+  add_foreign_key "revisions", "annotations"
+  add_foreign_key "revisions", "users"
+  add_foreign_key "users", "teams"
 end
