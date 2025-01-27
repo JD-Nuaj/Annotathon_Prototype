@@ -4,9 +4,11 @@ class User < ApplicationRecord
 devise :database_authenticatable, :registerable,
        :recoverable, :rememberable, :validatable
 
-validates :username, presence: true, uniqueness: true
-validates :role, inclusion: { in: %w[annotator instructor admin] }
-
 belongs_to :team, optional: true
+has_many :annotations, dependent: :destroy
+has_many :revisions, dependent: :destroy
 
+validates :username, presence: true, uniqueness: true
+validates :email, presence: true, uniqueness: true
+validates :role, presence: true, inclusion: { in: %w[annotator instructor admin] }
 end
