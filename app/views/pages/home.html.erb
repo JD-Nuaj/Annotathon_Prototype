@@ -1,0 +1,71 @@
+<!-- app/views/pages/home.html.erb -->
+<div class="w-full min-h-screen relative flex flex-col mt-[-64px]">
+  <%= render "shared/banner" %>
+
+  <!-- Main Content -->
+  <div class="w-full flex flex-col mt-0">
+    <!-- Section 1: Why Annotathon -->
+    <section class="bg-gray-100 py-16 w-full">
+      <div class="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-16">Why Annotathon?</h2>
+        <div class="space-y-16">
+          <!-- Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <img src="https://www.univ-amu.fr/system/files/2022-03/OCEAN-Tuile_recherche.jpg" alt="Research" class="w-full h-48 object-cover rounded-lg">
+              <h3 class="text-xl font-semibold mt-4">Collaboration</h3>
+              <p class="text-gray-700">Work with teams from around the world to annotate DNA fragments.</p>
+            </div>
+            <div class="text-center">
+              <img src="https://grenoblecognition.fr/wp-content/uploads/2024/09/carrieres_apres_biologie_7410.jpg" alt="Learning" class="w-full h-48 object-cover rounded-lg">
+              <h3 class="text-xl font-semibold mt-4">Learning</h3>
+              <p class="text-gray-700">Discover the basics of bioinformatics while actively participating.</p>
+            </div>
+            <div class="text-center">
+              <img src="https://st.depositphotos.com/1004573/2001/v/450/depositphotos_20012529-stock-illustration-colorful-business-pie-chart.jpg" alt="Analysis" class="w-full h-48 object-cover rounded-lg">
+              <h3 class="text-xl font-semibold mt-4">Analysis</h3>
+              <p class="text-gray-700">Explore real biological data with professional tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: About Annotathon -->
+    <section class="bg-white py-16 w-full">
+      <div class="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-16">About Annotathon</h2>
+        <p class="text-gray-700 mb-8">
+          <strong>Bioinformatics Training Through Metagenomic Sequence Annotation</strong>
+          <br> The Annotathon is featured in the November 2008 edition of PLoS Biology: <em>Metagenome Annotation Using a Distributed Grid of Undergraduate Students</em>.
+        </p>
+        <p class="text-gray-700 mb-8">Students, please take the time to read the <strong>Rule Book</strong> for details on bioinformatics workflow and evaluations of your annotations.</p>
+        <p class="text-gray-700 mb-8">Bioinformatics teachers who wish to open a team are invited to read the <strong>Instructor Manual</strong></p>
+        <p class="text-gray-700">Other resources are in the <strong>About the Annotathon</strong> section.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: Teams -->
+    <section class="bg-gray-100 py-16 w-full">
+      <div class="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-16">Teams</h2>
+        <p class="text-gray-700 mb-8">Join teams, collaborate, and contribute to cutting-edge research.</p>
+        <div class="space-y-8">
+          <div class="text-left">
+            <h3 class="text-xl font-semibold">M2GE_2425 - Universite Lyon 1 - M2 (France)</h3>
+            <p class="text-gray-700">11 Annotators. Underway... Ends on 01.07.2025</p>
+          </div>
+          <div class="text-left">
+            <h3 class="text-xl font-semibold">M1_Sc_Mer_2025 - AMU - M1 Master Sc de la mer (France)</h3>
+            <p class="text-gray-700">15 Annotators. Underway... Ends on 01.07.2025</p>
+          </div>
+          <div class="text-left">
+            <h3 class="text-xl font-semibold">BioCell2025 - Aix Marseille - L3 Biologie Cellulaire (France)</h3>
+            <p class="text-gray-700">75 Annotators. Underway... Ends on 16.02.2025</p>
+          </div>
+          <!-- ... Other team entries ... -->
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

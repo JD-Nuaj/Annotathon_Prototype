@@ -1,0 +1,54 @@
+<nav class="fixed top-0 left-0 w-full bg-gray-800 text-white shadow-lg z-50 py-4" data-controller="search">
+  <div class="container mx-auto px-6 flex justify-between items-center">
+    <!-- Logo with border-radius -->
+    <div class="flex items-center">
+      <%= image_tag 'logo.png', alt: 'Annotathon Logo', class: 'h-12 w-12 rounded-full mr-4' %> <!-- Logo with border-radius 50% -->
+      <span class="text-xl font-bold">Annotathon-Prototype v2</span>
+    </div>
+
+    <!-- Links -->
+    <div class="hidden md:flex space-x-8">
+      <%= link_to "Home", root_path, class: "hover:text-gray-300" %>
+      <%= link_to "Rule Book", rule_book_path, class: "hover:text-gray-300" %>
+      <%= link_to "Forum", forums_path, class: "hover:text-gray-300" %>
+      <%= link_to "New Account", new_user_registration_path, class: "hover:text-gray-300" %>
+      <%= link_to "Help", help_path, class: "hover:text-gray-300" %>
+    </div>
+
+    <!-- User menu and search icon -->
+    <div class="flex items-center space-x-4">
+      <% if user_signed_in? %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, turbo_stream: "true" }, class: "hover:text-gray-300" %>
+
+      <% else %>
+        <%= link_to "Log in", new_user_session_path, class: "bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-400 transition duration-200" %>
+      <% end %>
+
+      <!-- Search icon -->
+      <div class="relative">
+        <button type="button" data-action="click->search#toggleSearch" class="text-white" data-target="search.searchIcon">
+          <i class="fas fa-search"></i>
+        </button>
+        <div id="searchBar" class="absolute hidden bg-gray-800 text-white top-0 right-0 mt-10 p-2 rounded-lg w-full sm:w-64" data-target="search.searchBar">
+          <input type="text" placeholder="Search..." class="bg-gray-900 text-white px-4 py-2 rounded-md focus:outline-none w-full" />
+        </div>
+      </div>
+
+      <!-- Mobile hamburger menu -->
+      <div class="md:hidden">
+        <button class="text-white" data-action="click->search#toggleMobileMenu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="md:hidden bg-gray-800 text-white p-4" id="mobileMenu" data-target="search.mobileMenu">
+    <%= link_to "Home", root_path, class: "block hover:text-gray-300" %>
+    <%= link_to "Rule Book", rule_book_path, class: "block hover:text-gray-300" %>
+    <%= link_to "Forum", forums_path, class: "block hover:text-gray-300" %>
+    <%= link_to "New Account", new_user_registration_path, class: "block hover:text-gray-300" %>
+    <%= link_to "Help", help_path, class: "block hover:text-gray-300" %>
+  </div>
+</nav>

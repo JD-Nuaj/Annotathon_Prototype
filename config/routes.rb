@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
-  get "forums/index"
-  get "forums/show"
-  get "forums/new"
-  get "forums/create"
-  get "forums/edit"
-  get "forums/update"
-  get "forums/destroy"
+  # Routes Devise pour les utilisateurs
+  devise_for :users
+
   # Page d'accueil
   root "pages#home"
 
@@ -44,3 +40,4 @@ Rails.application.routes.draw do
   get "/instructor_manual", to: "pages#instructor_manual"
   get "/help", to: "pages#help"
 end
+
