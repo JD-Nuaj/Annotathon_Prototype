@@ -1,9 +1,11 @@
 <nav class="fixed top-0 left-0 w-full bg-gray-800 text-white shadow-lg z-50 py-4" data-controller="search">
   <div class="container mx-auto px-6 flex justify-between items-center">
-    <!-- Logo -->
-    <div class="flex items-center">
-      <%= image_tag 'logo.png', alt: 'Annotathon Logo', class: 'h-12 w-12 rounded-full mr-4' %>
-      <span class="text-xl font-bold">Annotathon-Prototype v2</span>
+    <!-- Logo et texte cliquables pour rediriger vers la page d'accueil -->
+    <div class="flex items-center space-x-4">
+      <%= link_to root_path, class: "flex items-center" do %>
+        <%= image_tag 'logo.png', alt: 'Annotathon Logo', class: 'h-12 w-12 rounded-full mr-4' %>
+        <span class="text-xl font-bold">Annotathon-Prototype v2</span>
+      <% end %>
     </div>
 
     <!-- Liens visibles sur écran medium et plus -->
