@@ -24,13 +24,20 @@
         <%= link_to "Log in", new_user_session_path, class: "bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-400 transition duration-200" %>
       <% end %>
 
-      <!-- Search icon -->
       <div class="relative">
+        <!-- Search Icon -->
         <button type="button" data-action="click->search#toggleSearch" class="text-white" data-target="search.searchIcon">
           <i class="fas fa-search"></i>
         </button>
+
+        <!-- Search Bar with Link -->
         <div id="searchBar" class="absolute hidden bg-gray-800 text-white top-0 right-0 mt-10 p-2 rounded-lg w-full sm:w-64" data-target="search.searchBar">
-          <input type="text" placeholder="Search..." class="bg-gray-900 text-white px-4 py-2 rounded-md focus:outline-none w-full" />
+          <div class="flex flex-col gap-4">
+            <input type="text" placeholder="Search..." class="bg-gray-900 text-white px-4 py-2 rounded-md focus:outline-none w-full" />
+
+            <!-- Link: "Qui suis-je ?" -->
+            <a href="https://www.linkedin.com/in/juan-descoux-897a41301/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">Qui suis-je ?</a>
+          </div>
         </div>
       </div>
 
